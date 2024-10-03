@@ -8,8 +8,7 @@ public class Book {
     private String ISBN;
     private Float price;
 
-    public Book(int id, String title, String author, String genre, String ISBN, Float price) {
-        this.id = id;
+    public Book(String title, String author, String genre, String ISBN, Float price) {
         this.title = title;
         this.author = author;
         this.genre = genre;
@@ -17,7 +16,7 @@ public class Book {
         this.price = price;
     }
 
-    private boolean isValidISBN(String isbn) {
+    public static boolean isValidISBN(String isbn) {
         //ISBN-10 Format:
         //Matches 1 to 5 digits followed by hyphens and digits, allowing an 'X' as the last character.
         //Alternatively, matches a straight sequence of 10 digits without hyphens.
@@ -30,13 +29,6 @@ public class Book {
         return Pattern.matches(isbn10Pattern, isbn) || Pattern.matches(isbn13Pattern, isbn);
     }
 
-    public int getId () {
-        return id;
-    }
-
-    public void setId() {
-        this.id = id;
-    }
     public String getTitle() {
         return title;
     }
@@ -73,7 +65,6 @@ public class Book {
 
     public String toString() {
         return "Book{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", genre='" + genre + '\'' +

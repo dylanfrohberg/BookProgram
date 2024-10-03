@@ -58,14 +58,13 @@ public class BookDatabaseManager {
 
             try (PreparedStatement statement = conn.prepareStatement(query); ResultSet resultSet = statement.executeQuery()){
                 while (resultSet.next()){
-                    int id = resultSet.getInt("id");
                     String title = resultSet.getString("title");
                     String author = resultSet.getString("author");
                     String genre = resultSet.getString("genre");
                     String isbn = resultSet.getString("ISBN");
                     float price = resultSet.getFloat("price");
 // If you want to create a Book object
-                    Book book = new Book(id, title, author, genre, isbn, price);
+                    Book book = new Book(title, author, genre, isbn, price);
                     urlsList.add(book);
                 }
             }
