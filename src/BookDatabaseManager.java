@@ -1,7 +1,7 @@
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class BookDatabaseManager {
 
@@ -46,10 +46,9 @@ public class BookDatabaseManager {
             }
         }
     }
-
     /*--METHOD TO GET DATA FROM DATABASE--*/
-    public static List<Book> getAllUrlsFromDatabase(){
-        List<Book> urlsList = new ArrayList<>();
+    public static List<Book> getAllBooksFromDatabase(){
+        List<Book> bookList = new ArrayList<>();
         Connection conn = null;
 
         try {
@@ -61,17 +60,17 @@ public class BookDatabaseManager {
                     String title = resultSet.getString("title");
                     String author = resultSet.getString("author");
                     String genre = resultSet.getString("genre");
-                    String isbn = resultSet.getString("ISBN");
+                    String ISBN = resultSet.getString("ISBN");
                     float price = resultSet.getFloat("price");
-// If you want to create a Book object
-                    Book book = new Book(title, author, genre, isbn, price);
-                    urlsList.add(book);
+
+                    Book bookObj = new Book(title, author ,genre, ISBN, price);
+                    bookList.add(bookObj);
                 }
             }
         } catch (Exception e){
             e.printStackTrace();
         }
-        return urlsList;
+        return bookList;
     }
 
 

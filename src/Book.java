@@ -1,7 +1,6 @@
 import java.util.regex.*;
 
 public class Book {
-    private int id;
     private String title;
     private String author;
     private String genre;
@@ -12,45 +11,50 @@ public class Book {
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.ISBN = ISBN;
+        setISBN(ISBN);
         this.price = price;
     }
 
     public static boolean isValidISBN(String isbn) {
-        //ISBN-10 Format:
-        //Matches 1 to 5 digits followed by hyphens and digits, allowing an 'X' as the last character.
-        //Alternatively, matches a straight sequence of 10 digits without hyphens.
-        //ISBN-13 Format:
-        //Matches 1 to 5 digits followed by hyphens and groups of digits, ensuring a single digit for the check digit.
-        //Both formats are anchored to the start and end of the string.
-        String isbn10Pattern = "^(?:\\d{1,5}-\\d{1,7}-\\d{1,7}-[\\dX]|\\d{10})$";
-        String isbn13Pattern = "^(?:\\d{1,5}-\\d{1,7}-\\d{1,7}-\\d{1}-\\d{1,7})$";
 
-        return Pattern.matches(isbn10Pattern, isbn) || Pattern.matches(isbn13Pattern, isbn);
+        // Check if ISBN is null
+        if (isbn == null) {
+            return false;
+        }
+
+        // Remove hyphens and any spaces for validation
+        String cleanIsbn = isbn.replace("-", "").replaceAll("\\s+", "");
+
+        // Check if cleaned ISBN has a valid length
+        if (cleanIsbn.length() != 10 && cleanIsbn.length() != 13) {
+            return false;
+        }
+        // Check if cleaned ISBN contains only digits
+        return cleanIsbn.matches("\\d+"); // Return true if only digits
     }
 
     public String getTitle() {
         return title;
     }
-    public void setTitle(){
+    public void setTitle(String title){
         this.title = title;
     }
     public String getAuthor(){
         return author;
     }
-    public void setAuthor(){
+    public void setAuthor(String author){
         this.author = author;
     }
     public String getGenre(){
         return genre;
     }
-    public void setGenre(){
+    public void setGenre(String genre){
         this.genre = genre;
     }
     public String getISBN(){
         return ISBN;
     }
-    public void setISBN() {
+    public void setISBN(String ISBN) {
     if (!isValidISBN(ISBN)) {
         throw new IllegalArgumentException("Invalid ISBN format");
     }
@@ -59,7 +63,7 @@ public class Book {
     public Float getPrice(){
         return price;
     }
-    public void setPrice(){
+    public void setPrice(Float price){
         this.price = price;
     }
 

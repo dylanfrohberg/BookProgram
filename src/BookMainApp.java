@@ -16,7 +16,7 @@ public class BookMainApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("BookForm.fxml"));
         primaryStage.setTitle("Book Database Program");
-        primaryStage.setScene(new Scene(root, 600,200));
+        primaryStage.setScene(new Scene(root, 1200,400));
         primaryStage.show();
         
     }
